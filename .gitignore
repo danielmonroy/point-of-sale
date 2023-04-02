@@ -29,6 +29,9 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+# Ignore .DS files
+*.DS_Store
+
 /public/assets
 
 # Ignore master key for decrypting credentials and more.

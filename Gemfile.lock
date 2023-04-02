@@ -85,7 +85,9 @@ GEM
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
-    debug (1.7.1)
+    debug (1.7.2)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     devise (4.9.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -101,6 +103,9 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    io-console (0.6.0)
+    irb (1.6.3)
+      reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -117,7 +122,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.18.0)
-    msgpack (1.6.1)
+    msgpack (1.7.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -167,11 +172,15 @@ GEM
     rake (13.0.6)
     redis (4.8.1)
     regexp_parser (2.7.0)
+    reline (0.3.3)
+      io-console (~> 0.5)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.5)
     rubyzip (2.3.2)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -180,7 +189,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    selenium-webdriver (4.8.1)
+    selenium-webdriver (4.8.6)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -191,7 +200,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.6.1-arm64-darwin)
+    sqlite3 (1.6.2-arm64-darwin)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.1)
@@ -235,7 +244,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   redis (~> 4.0)
-  sassc-rails
+  sass-rails
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
