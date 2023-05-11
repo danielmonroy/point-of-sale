@@ -1,42 +1,73 @@
-<%= form_with(model: item) do |form| %>
-  <% if item.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
-        <% item.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<!--begin::Form-->
+<%= form_with scope: :item, url: "/items", method: :post do |form| %>
+<!--begin::Modal body-->
+<div class="modal-body py-10 px-lg-17">
+  <!--begin::Scroll-->
+  <div class="scroll-y me-n7 pe-7" id="kt_modal_new_item_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_item_header" data-kt-scroll-wrappers="#kt_modal_new_item_scroll" data-kt-scroll-offset="300px">
+    <!--begin::Input group-->
+    <div class="d-flex flex-column mb-5 fv-row">
+      <!--begin::Label-->
+      <label class="required fs-5 fw-semibold mb-2">Nombre</label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <%= form.text_field :name, class: "form-control form-control-solid" %>
+      <!--end::Input-->
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="d-flex flex-column mb-5 fv-row">
+      <!--begin::Label-->
+      <label class="required fs-5 fw-semibold mb-2">Stock</label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <%= form.number_field :stock, class: "form-control form-control-solid" %>
+      <!--end::Input-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="d-flex flex-column mb-5 fv-row">
+      <!--begin::Label-->
+      <label class="fs-5 fw-semibold mb-2">Unidad de medida</label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <%= form.select :measurement_unit, [["Kilos", "kg"], ["Gramos", "g"], ["Litros", "lt"], ["Mililitros", "ml"], ["Unidades", "u"]], {}, class: "form-select form-select-solid" %>
+      <!--end::Input-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="d-flex flex-column mb-5 fv-row">
+      <!--begin::Label-->
+      <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
+        <span class="required">Alerta de stock</span>
+        <span class="ms-1" data-bs-toggle="tooltip" title="El insumo aparecerá como insuficiente cuando su stock se encuentre debajo de este número">
+          <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+            <span class="path1"></span>
+            <span class="path2"></span>
+            <span class="path3"></span>
+          </i>
+        </span>
+      </label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <%= form.number_field :stock_warning, class: "form-control form-control-solid" %>
+      <!--end::Input-->
+    </div>
+    <!--end::Input group-->
   </div>
-
-  <div>
-    <%= form.label :stock, style: "display: block" %>
-    <%= form.text_field :stock %>
-  </div>
-
-  <div>
-    <%= form.label :measurement_unit, style: "display: block" %>
-    <%= form.text_field :measurement_unit %>
-  </div>
-
-  <div>
-    <%= form.label :stock_warning, style: "display: block" %>
-    <%= form.text_field :stock_warning %>
-  </div>
-
-  <div>
-    <%= form.label :store_id, style: "display: block" %>
-    <%= form.text_field :store_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <!--end::Scroll-->
+</div>
+<!--end::Modal body-->
+<!--begin::Modal footer-->
+<div class="modal-footer flex-center">
+  <!--begin::Button-->
+  <button type="reset" id="kt_modal_new_item_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+  <!--end::Button-->
+  <!--begin::Button-->
+  <button type="submit" id="kt_modal_new_item_submit" class="btn btn-primary">
+    <span>Guardar</span>
+  </button>
+  <!--end::Button-->
+</div>
+<!--end::Modal footer-->
 <% end %>
+<!--end::Form-->

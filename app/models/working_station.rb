@@ -1,0 +1,2 @@
+class WorkingStation < ApplicationRecord
+end

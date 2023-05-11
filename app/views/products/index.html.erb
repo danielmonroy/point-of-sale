@@ -1,14 +1,132 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
+<!--begin::Toolbar-->
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+  <!--begin::Toolbar container-->
+  <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+    <!--begin::Page title-->
+    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+      <!--begin::Title-->
+      <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Productos</h1>
+      <!--end::Title-->
+      <!--begin::Breadcrumb-->
+      <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">
+          <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Administración</a>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <!--
+        <li class="breadcrumb-item">
+          <span class="bullet bg-gray-400 w-5px h-2px"></span>
+        </li>
+        -->
+        <!--end::Item-->
+        <!--begin::Item-->
+        <!--<li class="breadcrumb-item text-muted">Dashboards</li>-->
+        <!--end::Item-->
+      </ul>
+      <!--end::Breadcrumb-->
+    </div>
+    <!--end::Page title-->
+    <!--begin::Actions-->
+    <div class="d-flex align-items-center gap-2 gap-lg-3">
+      <!--begin::Secondary button-->
+      <!--<a href="#" class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a>-->
+      <!--end::Secondary button-->
+      <!--begin::Primary button-->
+      <!--<a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_item">Nuevo Insumo</a>-->
+      <!--end::Primary button-->
+    </div>
+    <!--end::Actions-->
+  </div>
+  <!--end::Toolbar container-->
 </div>
+<!--end::Toolbar-->
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+  <!--begin::Content container-->
+  <div id="kt_app_content_container" class="app-container container-fluid">
+    <!--begin::Card-->
+    <div class="card card-flush">
+      <!--begin::Card header-->
+      <div class="card-header mt-6">
+        <!--begin::Card title-->
+        <div class="card-title">
+          <!--begin::Search-->
+          <div class="d-flex align-items-center position-relative my-1 me-5">
+            <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+            <input type="text" data-kt-permissions-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Buscar Producto" />
+          </div>
+          <!--end::Search-->
+        </div>
+        <!--end::Card title-->
+        <!--begin::Card toolbar-->
+        <div class="card-toolbar">
+          <!--begin::Button-->
+          <button type="button" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_item">
+          <i class="ki-duotone ki-plus-square fs-3">
+            <span class="path1"></span>
+            <span class="path2"></span>
+            <span class="path3"></span>
+          </i>Nuevo Producto</button>
+          <!--end::Button-->
+        </div>
+        <!--end::Card toolbar-->
+      </div>
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-0">
+        <!--begin::Table-->
+        <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
+          <thead>
+            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+              <th class="">Producto</th>
+              <th class="">Categoría</th>
+              <th class="">Código</th>
+              <th class="">Estación de Preparación</th>
+              <th class="">Disponibilidad</th>
+              <th class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="fw-semibold text-gray-600">
+            <% @products.each do |product| %>
+            <tr>
+              <td>
+              <%= link_to product.name.capitalize, product, class: "text-dark fw-bold text-hover-primary d-block mb-1 fs-6" %>
+              </td>
+              <td><%= product.category.name.capitalize %></td>
+              <td><%= product.product_code %></td>
+              <td><span class="badge badge-light-info"><%= product.working_station.name.capitalize %></span></td>
+              <td>
+                <% if product.available %>
+                <span class="badge badge-light-success">Activo</span>
+                <% else %>
+                <span class="badge badge-light-danger">Inactivo</span>
+                <% end %>
+              </td>
+              <td class="text-end">
+                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                  <i class="ki-duotone ki-pencil fs-2">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                </a>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <!--end::Table-->
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Content container-->
+</div>
+<!--end::Content-->
 
-<%= link_to "New product", new_product_path %>
+<%= render "products/modals" %>

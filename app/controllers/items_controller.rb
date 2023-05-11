@@ -22,10 +22,11 @@ class ItemsController < ApplicationController
   # POST /items or /items.json
   def create
     @item = Item.new(item_params)
+    @item.store_id = current_user.store_id
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
+        format.html { redirect_to items_path, notice: "Insumo creado con éxito." }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,16 +45,6 @@ class ItemsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /items/1 or /items/1.json
-  def destroy
-    @item.destroy
-
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

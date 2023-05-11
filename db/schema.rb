@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_232400) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_045222) do
   create_table "cart_product_extras", force: :cascade do |t|
     t.integer "cart_product_id", null: false
     t.integer "item_id", null: false
@@ -81,8 +81,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_232400) do
     t.string "product_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "working_station_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["store_id"], name: "index_products_on_store_id"
+    t.index ["working_station_id"], name: "index_products_on_working_station_id"
   end
 
   create_table "sale_product_extras", force: :cascade do |t|
@@ -149,6 +151,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_232400) do
     t.index ["store_id"], name: "index_users_on_store_id"
   end
 
+  create_table "working_stations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "store_id", null: false
+    t.index ["store_id"], name: "index_working_stations_on_store_id"
+  end
+
   add_foreign_key "cart_product_extras", "cart_products"
   add_foreign_key "cart_product_extras", "items"
   add_foreign_key "cart_products", "carts"
@@ -160,6 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_232400) do
   add_foreign_key "product_items", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"
+  add_foreign_key "products", "working_stations"
   add_foreign_key "sale_product_extras", "items"
   add_foreign_key "sale_product_extras", "sale_products"
   add_foreign_key "sale_products", "products"
@@ -168,4 +179,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_232400) do
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "users", "stores"
+  add_foreign_key "working_stations", "stores"
 end

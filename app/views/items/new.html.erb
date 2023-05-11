@@ -1,9 +1,26 @@
-<h1>New item</h1>
-
-<%= render "form", item: @item %>
-
-<br>
-
-<div>
-  <%= link_to "Back to items", items_path %>
+<!--begin::Modal - New Item-->
+<div class="modal fade" id="kt_modal_new_item" tabindex="-1" aria-hidden="true">
+  <!--begin::Modal dialog-->
+  <div class="modal-dialog modal-dialog-centered mw-650px">
+    <!--begin::Modal content-->
+    <div class="modal-content">
+      <!--begin::Modal header-->
+      <div class="modal-header" id="kt_modal_new_item_header">
+        <!--begin::Modal title-->
+        <h2>Agregar Nuevo Insumo</h2>
+        <!--end::Modal title-->
+        <!--begin::Close-->
+        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+          <i class="ki-duotone ki-cross fs-1">
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </i>
+        </div>
+        <!--end::Close-->
+      </div>
+      <!--end::Modal header-->
+      <%= render "form", item: @item %>
+    </div>
+  </div>
 </div>
+<!--end::Modal - New Item-->
