@@ -33,9 +33,11 @@
 *.DS_Store
 
 # Ignore template assets
-/public/assets
 /tools/node_modules
 !/tools/node_modules
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore .env file
+.env
