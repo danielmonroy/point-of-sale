@@ -26,7 +26,6 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.store_id = current_user.store_id
-    @product.available = false
 
     respond_to do |format|
       if @product.save

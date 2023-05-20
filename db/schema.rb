@@ -39,33 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "cart_product_extras", force: :cascade do |t|
-    t.integer "cart_product_id", null: false
-    t.integer "item_id", null: false
-    t.decimal "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cart_product_id"], name: "index_cart_product_extras_on_cart_product_id"
-    t.index ["item_id"], name: "index_cart_product_extras_on_item_id"
-  end
-
-  create_table "cart_products", force: :cascade do |t|
-    t.integer "cart_id", null: false
-    t.integer "product_id", null: false
-    t.decimal "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cart_id"], name: "index_cart_products_on_cart_id"
-    t.index ["product_id"], name: "index_cart_products_on_product_id"
-  end
-
-  create_table "carts", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
-  end
-
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.integer "store_id", null: false
@@ -105,7 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
     t.string "name"
     t.integer "category_id", null: false
     t.integer "store_id", null: false
-    t.boolean "available"
+    t.boolean "available", default: false
     t.string "product_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -114,38 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["store_id"], name: "index_products_on_store_id"
     t.index ["working_station_id"], name: "index_products_on_working_station_id"
-  end
-
-  create_table "sale_product_extras", force: :cascade do |t|
-    t.integer "sale_product_id", null: false
-    t.integer "item_id", null: false
-    t.decimal "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_sale_product_extras_on_item_id"
-    t.index ["sale_product_id"], name: "index_sale_product_extras_on_sale_product_id"
-  end
-
-  create_table "sale_products", force: :cascade do |t|
-    t.integer "sale_id", null: false
-    t.integer "product_id", null: false
-    t.decimal "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_sale_products_on_product_id"
-    t.index ["sale_id"], name: "index_sale_products_on_sale_id"
-  end
-
-  create_table "sales", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.decimal "sale_total"
-    t.decimal "discount"
-    t.integer "payment_method"
-    t.string "ticket_id"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -190,11 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "cart_product_extras", "cart_products"
-  add_foreign_key "cart_product_extras", "items"
-  add_foreign_key "cart_products", "carts"
-  add_foreign_key "cart_products", "products"
-  add_foreign_key "carts", "users"
   add_foreign_key "categories", "stores"
   add_foreign_key "items", "stores"
   add_foreign_key "product_items", "items"
@@ -202,11 +138,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"
   add_foreign_key "products", "working_stations"
-  add_foreign_key "sale_product_extras", "items"
-  add_foreign_key "sale_product_extras", "sale_products"
-  add_foreign_key "sale_products", "products"
-  add_foreign_key "sale_products", "sales"
-  add_foreign_key "sales", "users"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "users", "stores"

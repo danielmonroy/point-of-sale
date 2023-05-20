@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.string :name
       t.references :category, null: false, foreign_key: true
       t.references :store, null: false, foreign_key: true
-      t.boolean :available
+      t.boolean :available, default: false
       t.string :product_code
 
       t.timestamps
