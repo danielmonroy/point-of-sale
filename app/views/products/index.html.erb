@@ -66,12 +66,28 @@
         <!--begin::Card toolbar-->
         <div class="card-toolbar">
           <!--begin::Button-->
+          <button type="button" class="btn btn-light-warning me-5" data-bs-toggle="modal" data-bs-target="#kt_modal_new_category">
+          <i class="ki-duotone ki-plus-square fs-3">
+            <span class="path1"></span>
+            <span class="path2"></span>
+            <span class="path3"></span>
+          </i>Nueva categoría</button>
+          <!--end::Button-->
+          <!--begin::Button-->
+          <button type="button" class="btn btn-light-info me-5" data-bs-toggle="modal" data-bs-target="#kt_modal_new_working_station">
+          <i class="ki-duotone ki-plus-square fs-3">
+            <span class="path1"></span>
+            <span class="path2"></span>
+            <span class="path3"></span>
+          </i>Nueva estación de trabajo</button>
+          <!--end::Button-->
+          <!--begin::Button-->
           <button type="button" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_item">
           <i class="ki-duotone ki-plus-square fs-3">
             <span class="path1"></span>
             <span class="path2"></span>
             <span class="path3"></span>
-          </i>Nuevo Producto</button>
+          </i>Nuevo producto</button>
           <!--end::Button-->
         </div>
         <!--end::Card toolbar-->
@@ -84,8 +100,8 @@
           <thead>
             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
               <th class="">Producto</th>
+              <th class="">Precio</th>
               <th class="">Categoría</th>
-              <th class="">Código</th>
               <th class="">Estación de Preparación</th>
               <th class="">Disponibilidad</th>
               <th class="text-end">Acciones</th>
@@ -95,10 +111,10 @@
             <% @products.each do |product| %>
             <tr>
               <td>
-              <%= link_to product.name.capitalize, product, class: "text-dark fw-bold text-hover-primary d-block mb-1 fs-6" %>
+              <%= link_to product.name.capitalize, edit_product_path(product), class: "text-dark fw-bold text-hover-primary d-block mb-1 fs-6" %>
               </td>
+              <td><%= number_to_currency(product.price) %></td>
               <td><%= product.category.name.capitalize %></td>
-              <td><%= product.product_code %></td>
               <td><span class="badge badge-light-info"><%= product.working_station.name.capitalize %></span></td>
               <td>
                 <% if product.available %>
@@ -108,12 +124,12 @@
                 <% end %>
               </td>
               <td class="text-end">
-                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                <%= link_to edit_product_path(product), class: "btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  do %>
                   <i class="ki-duotone ki-pencil fs-2">
                     <span class="path1"></span>
                     <span class="path2"></span>
                   </i>
-                </a>
+                <% end %>
               </td>
             </tr>
             <% end %>

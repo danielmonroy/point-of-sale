@@ -1,26 +1,133 @@
-<!--begin::Modal - New Item-->
-<div class="modal fade" id="kt_modal_new_item" tabindex="-1" aria-hidden="true">
-  <!--begin::Modal dialog-->
-  <div class="modal-dialog modal-dialog-centered mw-650px">
-    <!--begin::Modal content-->
-    <div class="modal-content">
-      <!--begin::Modal header-->
-      <div class="modal-header" id="kt_modal_new_item_header">
-        <!--begin::Modal title-->
-        <h2>Editar Insumo</h2>
-        <!--end::Modal title-->
-        <!--begin::Close-->
-        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-          <i class="ki-duotone ki-cross fs-1">
-            <span class="path1"></span>
-            <span class="path2"></span>
-          </i>
-        </div>
-        <!--end::Close-->
-      </div>
-      <!--end::Modal header-->
-      <%= render "form", item: @item %>
+<!--begin::Toolbar-->
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+  <!--begin::Toolbar container-->
+  <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+    <!--begin::Page title-->
+    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+      <!--begin::Title-->
+      <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0"><%= @item.name.capitalize %></h1>
+      <!--end::Title-->
+      <!--begin::Breadcrumb-->
+      <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">
+          <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Editar</a>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <!--
+        <li class="breadcrumb-item">
+          <span class="bullet bg-gray-400 w-5px h-2px"></span>
+        </li>
+        -->
+        <!--end::Item-->
+        <!--begin::Item-->
+        <!--<li class="breadcrumb-item text-muted">Dashboards</li>-->
+        <!--end::Item-->
+      </ul>
+      <!--end::Breadcrumb-->
     </div>
+    <!--end::Page title-->
+    <!--begin::Actions-->
+    <div class="d-flex align-items-center gap-2 gap-lg-3">
+      <!--begin::Secondary button-->
+      <!--<a href="#" class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a>-->
+      <!--end::Secondary button-->
+      <!--begin::Primary button-->
+      <!--<a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_item">Nuevo Insumo</a>-->
+      <!--end::Primary button-->
+    </div>
+    <!--end::Actions-->
   </div>
+  <!--end::Toolbar container-->
 </div>
-<!--end::Modal - New Item-->
+<!--end::Toolbar-->
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+  <!--begin::Content container-->
+  <div id="kt_app_content_container" class="app-container container-fluid">
+    <!--begin::Card-->
+    <div class="card card-flush">
+      <!--begin::Card body-->
+      <div class="card-body pt-0">
+        <!--begin::Form-->
+        <%= form_with model: @item do |form| %>
+          <!--begin::Modal body-->
+          <div class="modal-body py-10 px-lg-17">
+            <!--begin::Scroll-->
+            <div class="scroll-y me-n7 pe-7" id="kt_modal_new_item_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_item_header" data-kt-scroll-wrappers="#kt_modal_new_item_scroll" data-kt-scroll-offset="300px">
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-5 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nombre</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <%= form.text_field :name, class: "form-control form-control-solid" %>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-5 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Stock</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <%= form.number_field :stock, class: "form-control form-control-solid" %>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-5 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Unidad de medida</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <%= form.select :measurement_unit, [["Kilos", "kg"], ["Gramos", "g"], ["Litros", "lt"], ["Mililitros", "ml"], ["Unidades", "u"]], {}, class: "form-select form-select-solid" %>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-5 fv-row">
+                <!--begin::Label-->
+                <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
+                  <span class="required">Alerta de stock</span>
+                  <span class="ms-1" data-bs-toggle="tooltip" title="El insumo aparecerá como insuficiente cuando su stock se encuentre debajo de este número">
+                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                      <span class="path3"></span>
+                    </i>
+                  </span>
+                </label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <%= form.number_field :stock_warning, class: "form-control form-control-solid" %>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+            </div>
+            <!--end::Scroll-->
+          </div>
+          <!--end::Modal body-->
+          <!--begin::Modal footer-->
+          <div class="modal-footer flex-center">
+            <!--begin::Button-->
+            <%= link_to "Cancelar", items_path, class: "btn btn-light me-3" %>
+            <!--end::Button-->
+            <!--begin::Button-->
+            <button type="submit" id="kt_modal_new_item_submit" class="btn btn-primary">
+              <span>Guardar</span>
+            </button>
+            <!--end::Button-->
+          </div>
+          <!--end::Modal footer-->
+        <% end %>
+        <!--end::Form-->
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Content container-->
+</div>
+<!--end::Content-->

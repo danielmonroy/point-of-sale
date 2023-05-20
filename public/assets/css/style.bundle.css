@@ -49000,7 +49000,7 @@ body,
     height: var(--bs-app-header-height);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
     flex-shrink: 0;
   }

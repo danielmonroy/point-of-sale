@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :products
+  resources :products do
+    collection do
+      post 'add_product_items'
+      delete 'destroy_product_item'
+    end
+  end
   resources :items
   resources :categories
+  resources :working_stations
   resources :stores
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
