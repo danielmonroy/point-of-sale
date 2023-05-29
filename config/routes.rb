@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :orders do
+    collection do
+      get 'active_orders'
+    end
+  end
   devise_for :users
   resources :products do
     collection do

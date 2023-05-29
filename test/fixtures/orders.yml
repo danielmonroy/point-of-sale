@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  status: 1
+  delivery_app: 1
+  table: 1
+  store_id: one
+
+two:
+  type: 1
+  status: 1
+  delivery_app: 1
+  table: 1
+  store_id: two

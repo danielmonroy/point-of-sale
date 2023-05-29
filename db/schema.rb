@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_080421) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_items_on_store_id"
+  end
+
+  create_table "order_products", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity", default: 1
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_products_on_order_id"
+    t.index ["product_id"], name: "index_order_products_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "order_type"
+    t.integer "status", default: 0
+    t.integer "delivery_app"
+    t.integer "table"
+    t.integer "store_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_orders_on_store_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -133,6 +155,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_114444) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "stores"
   add_foreign_key "items", "stores"
+  add_foreign_key "order_products", "orders"
+  add_foreign_key "order_products", "products"
+  add_foreign_key "orders", "stores"
   add_foreign_key "product_items", "items"
   add_foreign_key "product_items", "products"
   add_foreign_key "products", "categories"

@@ -1,4 +1,5 @@
 class WorkingStationsController < ApplicationController
+  before_action :authenticate_user!
 
   # POST /working_stations or /working_stations.json
   def create
