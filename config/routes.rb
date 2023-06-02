@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  resources :payments
   resources :orders do
     collection do
       get 'active_orders'
+    end
+    member do
+      get 'add_ordered_product'
+      get 'print'
+      put 'add_product'
+      put 'close'
     end
   end
   devise_for :users

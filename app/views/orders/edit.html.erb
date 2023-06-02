@@ -39,7 +39,7 @@
                 <div class="d-flex flex-wrap d-grid gap-5 gap-xxl-9">
                   <% c.products.each do |p| %>
                   <!--begin::Card-->
-                  <a href="#">
+                  <%= link_to add_ordered_product_order_path(@order, product_id: p.id) , data: { turbo_frame: "modal" }, style: "width:140px;" do  %>
                     <div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">
                       <!--begin::Body-->
                       <div class="card-body text-center">
@@ -61,7 +61,7 @@
                       </div>
                       <!--end::Body-->
                     </div>
-                  </a>
+                  <% end %>
                   <!--end::Card-->
                   <% end %>
                 </div>

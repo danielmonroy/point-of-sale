@@ -1,16 +1,16 @@
 <%= turbo_frame_tag "modal" do %>
-  <!--begin::Modal - New Item-->
+  <!--begin::Modal - New Order Product-->
   <div class="modal fade show" id="kt_modal_new_item" tabindex="-1" aria-hidden="true" style="display:block;">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
       <!--begin::Modal content-->
       <div class="modal-content">
         <!--begin::Form-->
-        <%= form_with(model: @item) do |form| %>
+        <%= form_with url: "/orders/#{@order.id}/add_product", method: :put do |form| %>
           <!--begin::Modal header-->
           <div class="modal-header" id="kt_modal_new_item_header">
             <!--begin::Modal title-->
-            <h2>Editar Insumo</h2>
+            <h2><%= @product.name %></h2>
             <!--end::Modal title-->
             <!--begin::Close-->
             <%= link_to "#", data: { controller: "modals", action: "modals#close" }, class: "btn btn-sm btn-icon btn-active-color-primary" do %>
@@ -29,52 +29,41 @@
               <!--begin::Input group-->
               <div class="d-flex flex-column mb-5 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Nombre</label>
+                <label class="required fs-5 fw-semibold mb-2">Cantidad</label>
                 <!--end::Label-->
-                <!--begin::Input-->
-                <%= form.text_field :name, class: "form-control form-control-solid" %>
-                <!--end::Input-->
+                <!--begin::Dialer-->
+                <div class="position-relative d-flex align-items-center" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="15" data-kt-dialer-step="1" data-kt-dialer-decimals="0">
+                  <!--begin::Decrease control-->
+                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" data-kt-dialer-control="decrease">
+                    <i class="ki-duotone ki-minus fs-5x"></i>
+                  </button>
+                  <!--end::Decrease control-->
+                  <!--begin::Input control-->
+                  <input type="text" class="form-control border-0 text-center px-0 fs-5x fw-bold text-gray-800 w-100px" data-kt-dialer-control="input" placeholder="Amount" name="quantity" readonly="readonly" value="1" />
+                  <!--end::Input control-->
+                  <!--begin::Increase control-->
+                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" data-kt-dialer-control="increase">
+                    <i class="ki-duotone ki-plus fs-5x"></i>
+                  </button>
+                  <!--end::Increase control-->
+                </div>
+                <!--end::Dialer-->
               </div>
               <!--end::Input group-->
               <!--begin::Input group-->
               <div class="d-flex flex-column mb-5 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Stock</label>
+                <label class="required fs-5 fw-semibold mb-2">Comentarios</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <%= form.number_field :stock, class: "form-control form-control-solid" %>
+                <%= form.text_field :comment, class: "form-control form-control-solid" %>
                 <!--end::Input-->
               </div>
               <!--end::Input group-->
-              <!--begin::Input group-->
-              <div class="d-flex flex-column mb-5 fv-row">
-                <!--begin::Label-->
-                <label class="fs-5 fw-semibold mb-2">Unidad de medida</label>
-                <!--end::Label-->
-                <!--begin::Input-->
-                <%= form.select :measurement_unit, [["Kilos", "kg"], ["Gramos", "g"], ["Litros", "lt"], ["Mililitros", "ml"], ["Unidades", "u"]], {}, class: "form-select form-select-solid" %>
-                <!--end::Input-->
-              </div>
-              <!--end::Input group-->
-              <!--begin::Input group-->
-              <div class="d-flex flex-column mb-5 fv-row">
-                <!--begin::Label-->
-                <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
-                  <span class="required">Alerta de stock</span>
-                  <span class="ms-1" data-bs-toggle="tooltip" title="El insumo aparecerá como insuficiente cuando su stock se encuentre debajo de este número">
-                    <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                      <span class="path1"></span>
-                      <span class="path2"></span>
-                      <span class="path3"></span>
-                    </i>
-                  </span>
-                </label>
-                <!--end::Label-->
-                <!--begin::Input-->
-                <%= form.number_field :stock_warning, class: "form-control form-control-solid" %>
-                <!--end::Input-->
-              </div>
-              <!--end::Input group-->
+              <!--begin::Hidden inputs-->
+              <%= form.hidden_field :order_id, value: @order.id %>
+              <%= form.hidden_field :product_id, value: @product.id %>
+              <!--end::Hidden inputs-->
             </div>
             <!--end::Scroll-->
           </div>
@@ -85,11 +74,11 @@
             <%= button_to "Cancelar", "#", data: {
               controller: "modals",
               action: "modals#close",
-            }, class: "btn btn-light me-3" %>
+            }, class: "btn btn-light btn-lg me-3" %>
             <!--end::Button-->
             <!--begin::Button-->
-            <button type="submit" id="kt_modal_new_item_submit" class="btn btn-primary">
-              <span>Guardar</span>
+            <button type="submit" id="kt_modal_new_item_submit" class="btn btn-primary btn-lg">
+              <span>Agregar</span>
             </button>
             <!--end::Button-->
           </div>
@@ -99,5 +88,5 @@
       </div>
     </div>
   </div>
-  <!--end::Modal - New Item-->
+  <!--end::Modal - New Order Product -->
 <% end %>

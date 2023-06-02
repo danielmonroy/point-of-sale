@@ -1,0 +1,45 @@
+<div class="content-wrapper">
+  <div class="row">
+		<div class="col-md-4" id="print-div">
+      <img src="/custom-assets/images/akymbo-negro.png" style="max-width:250px;">
+      <br>
+      <h5>Monte Albán 506 <br>Independencia, Benito Juárez, CDMX</h5>
+      <h4>Venta: #<%= "AKNARV#{@order.id}" %></h4>
+      <p>Fecha: <%= @order.created_at.in_time_zone("Mexico City").strftime("%d/%m/%y") %> - Hora: <%= @order.created_at.in_time_zone("Mexico City").strftime("%H:%M")%></p>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th width='10%'></th>
+            <th width='70%'></th>
+            <th width='20%'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.order_products.each do |op| %>
+          <tr>
+            <td><%= op.quantity %></td>
+            <td><%= op.product.name %></td>
+            <td><%= number_to_currency(op.product.price) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <hr>
+      <h3>Total: <%= number_to_currency(@order.subtotal) %></h3>
+		</div>
+	</div>
+</div>
+<!-- content-wrapper ends -->
+
+<script>
+  //window.print();
+  var divContents = document.getElementById("print-div").innerHTML;
+  var a = window.open('', '', 'width=500');
+  a.document.write('<html>');
+  a.document.write('<body style="width:350px;"><div>');
+  a.document.write(divContents);
+  a.document.write('</div></body></html>');
+  a.document.close();
+  a.print();
+</script>

@@ -36,6 +36,9 @@
 /tools/node_modules
 !/tools/node_modules
 
+# Ignore public assets
+/public/assets/*
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 

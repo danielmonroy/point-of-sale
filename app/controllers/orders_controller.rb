@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[ show edit update destroy add_ordered_product close print ]
+  before_action :set_product, only: %i[ add_ordered_product ]
 
   # GET /orders or /orders.json
   def index
@@ -13,6 +14,39 @@ class OrdersController < ApplicationController
 
   def active_orders
     @orders = Order.open
+  end
+
+  def add_ordered_product
+  end
+
+  def add_product
+    return unless params[:order_id].present? && params[:product_id].present?
+    
+    @order_product = OrderProduct.new(ordered_product_params)
+    respond_to do |format|
+      if @order_product.save
+        format.html { redirect_to @order, notice: "Producto agregado." }
+      else
+        format.html { redirect_to @order, notice: "No se pudo agregar el producto." }
+      end
+    end
+  end
+
+  def close
+    respond_to do |format|
+      if @order.close(params[:payment_method])
+        format.html { redirect_to active_orders_orders_path }
+      else
+        format.html { redirect_to @order, notice: "No se pudo cerrar la orden." }
+      end
+    end
+  end
+
+  def open_ordered_product
+
+  end
+
+  def remove_ordered_product
   end
 
   # GET /orders/new
@@ -65,10 +99,22 @@ class OrdersController < ApplicationController
     end
   end
 
+  def print
+    render layout: "thermal_print"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def set_product
+      @product = Product.find(params[:product_id])
+    end
+
+    def ordered_product_params
+      params.permit(:product_id, :order_id, :comment, :quantity)
     end
 
     # Only allow a list of trusted parameters through.

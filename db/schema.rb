@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_080421) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_035533) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -78,6 +78,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_080421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_orders_on_store_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.decimal "total", default: "0.0"
+    t.decimal "discount", default: "0.0"
+    t.integer "discount_type"
+    t.integer "payment_method", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -158,6 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_080421) do
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "stores"
+  add_foreign_key "payments", "orders"
   add_foreign_key "product_items", "items"
   add_foreign_key "product_items", "products"
   add_foreign_key "products", "categories"
