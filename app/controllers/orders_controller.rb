@@ -13,7 +13,11 @@ class OrdersController < ApplicationController
   end
 
   def active_orders
-    @orders = Order.open
+    @orders = Order.open.order(created_at: :desc)
+  end
+
+  def closed_orders
+    @orders = Order.closed.order(created_at: :desc)
   end
 
   def add_ordered_product

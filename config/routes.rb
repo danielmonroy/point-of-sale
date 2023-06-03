@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :orders do
     collection do
       get 'active_orders'
+      get 'closed_orders'
     end
     member do
       get 'add_ordered_product'
