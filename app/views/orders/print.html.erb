@@ -4,15 +4,14 @@
       <img src="/custom-assets/images/akymbo-negro.png" style="max-width:250px;">
       <br>
       <h5>Monte Albán 506 <br>Independencia, Benito Juárez, CDMX</h5>
-      <h4>Venta: #<%= "AKNARV#{@order.id}" %></h4>
       <p>Fecha: <%= @order.created_at.in_time_zone("Mexico City").strftime("%d/%m/%y") %> - Hora: <%= @order.created_at.in_time_zone("Mexico City").strftime("%H:%M")%></p>
       <br>
       <table class="table">
         <thead>
           <tr>
-            <th width='10%'></th>
-            <th width='70%'></th>
-            <th width='20%'></th>
+            <th width='5%'></th>
+            <th width='80%'></th>
+            <th width='15%'></th>
           </tr>
         </thead>
         <tbody>
