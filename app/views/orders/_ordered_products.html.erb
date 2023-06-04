@@ -106,7 +106,9 @@
                 </div>
                 <!--end::Radio group-->
                 <!--begin::Actions-->
+                <% if @order.open? %>
                 <%= button_to "Cerrar Orden", "#", class: "btn btn-primary fs-1 w-100 py-4", data: { turbo_confirm: 'Cerrar Orden', turbo_method: :put } %>
+                <% end %>
                 <!--end::Actions-->
               </div>
             <% end %>
