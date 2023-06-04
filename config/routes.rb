@@ -8,8 +8,10 @@ Rails.application.routes.draw do
     member do
       get 'add_ordered_product'
       get 'print'
+      get 'view_ordered_product'
       put 'add_product'
       put 'close'
+      delete 'remove_ordered_product'
     end
   end
   devise_for :users

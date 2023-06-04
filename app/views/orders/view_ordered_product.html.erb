@@ -1,0 +1,72 @@
+<%= turbo_frame_tag "modal" do %>
+  <!--begin::Modal - View Order Product-->
+  <div class="modal fade show" id="kt_modal_new_item" tabindex="-1" aria-hidden="true" style="display:block;">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+      <!--begin::Modal content-->
+      <div class="modal-content">
+        <!--begin::Modal header-->
+        <div class="modal-header" id="kt_modal_new_item_header">
+          <!--begin::Modal title-->
+          <h2><%= @product.name %></h2>
+          <!--end::Modal title-->
+          <!--begin::Close-->
+          <%= link_to "#", data: { controller: "modals", action: "modals#close" }, class: "btn btn-sm btn-icon btn-active-color-primary" do %>
+            <i class="ki-duotone ki-cross fs-1">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+          <% end %>
+          <!--end::Close-->
+        </div>
+        <!--end::Modal header-->
+        <!--begin::Modal body-->
+        <div class="modal-body py-10 px-lg-17">
+          <!--begin::Scroll-->
+          <div class="scroll-y me-n7 pe-7" id="kt_modal_new_item_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_item_header" data-kt-scroll-wrappers="#kt_modal_new_item_scroll" data-kt-scroll-offset="300px">
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Cantidad</label>
+              <!--end::Label-->
+              <!--begin::Dialer-->
+              <div class="position-relative d-flex align-items-center" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="15" data-kt-dialer-step="1" data-kt-dialer-decimals="0">
+                <!--begin::Input control-->
+                <input type="text" class="form-control border-0 text-center px-0 fs-5x fw-bold text-gray-800 w-100px" data-kt-dialer-control="input" placeholder="Amount" name="quantity" readonly="readonly" value="1" />
+                <!--end::Input control-->
+              </div>
+              <!--end::Dialer-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Comentarios</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <p><%= @order_product.comment %></p>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+          </div>
+          <!--end::Scroll-->
+        </div>
+        <!--end::Modal body-->
+        <!--begin::Modal footer-->
+        <div class="modal-footer flex-center">
+          <!--begin::Button-->
+          <%= button_to "Cancelar", "#", data: {
+            controller: "modals",
+            action: "modals#close",
+          }, class: "btn btn-light btn-lg me-3" %>
+          <!--end::Button-->
+          <!--begin::Button-->
+          <%= link_to "Eliminar Producto", remove_ordered_product_order_path(order_product_id: @order_product.id), class: "btn btn-danger btn-lg", data: { turbo_confirm: '¿Eliminar Producto?', turbo_method: :delete } %>
+          <!--end::Button-->
+        </div>
+        <!--end::Modal footer-->
+      </div>
+    </div>
+  </div>
+  <!--end::Modal - New Order Product -->
+<% end %>

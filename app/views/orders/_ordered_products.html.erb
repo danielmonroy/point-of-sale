@@ -27,8 +27,8 @@
                   <% @order.order_products.each do |op| %>
                   <tr data-kt-pos-element="item" data-kt-pos-item-price="<%= op.product.price %>">
                     <td class="pe-0">
-                      <div class="d-flex align-items-center">          
-                        <span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-6 me-1"><%= op.product.name %></span>
+                      <div class="d-flex align-items-center">   
+                        <%= link_to op.product.name, view_ordered_product_order_path(order_product_id: op.id) , data: { turbo_frame: "modal" }, class: "fw-bold text-gray-800 cursor-pointer text-hover-primary fs-6 me-1" %>
                       </div>
                     </td>
                     <td class="pe-0 text-center">

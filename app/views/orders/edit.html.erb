@@ -32,12 +32,12 @@
             <!--end::Nav-->
             <!--begin::Tab Content-->
             <div class="tab-content">
-              <% @categories.each do |c| %>
+              <% @categories.order(name: :asc).each do |c| %>
               <!--begin::Tap pane-->
               <div class="tab-pane fade" id="kt_pos_food_content_<%= c.id %>">
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-wrap d-grid gap-5 gap-xxl-9">
-                  <% c.products.each do |p| %>
+                  <% c.products.order(name: :asc).each do |p| %>
                   <!--begin::Card-->
                   <%= link_to add_ordered_product_order_path(@order, product_id: p.id) , data: { turbo_frame: "modal" }, style: "width:140px;" do  %>
                     <div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">

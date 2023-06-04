@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[ show edit update destroy add_ordered_product close print ]
+  before_action :set_order, only: %i[ show edit update destroy add_ordered_product close print remove_ordered_product ]
   before_action :set_product, only: %i[ add_ordered_product ]
+  before_action :set_ordered_product, only: %i[ view_ordered_product remove_ordered_product ]
 
   # GET /orders or /orders.json
   def index
@@ -18,6 +19,18 @@ class OrdersController < ApplicationController
 
   def closed_orders
     @orders = Order.closed.order(created_at: :desc)
+  end
+
+  def view_ordered_product
+    @product = @order_product.product
+  end
+
+  def remove_ordered_product
+    @order_product.destroy
+
+    respond_to do |format|
+      format.html { redirect_to @order, notice: "Producto removido." }
+    end
   end
 
   def add_ordered_product
@@ -48,9 +61,6 @@ class OrdersController < ApplicationController
 
   def open_ordered_product
 
-  end
-
-  def remove_ordered_product
   end
 
   # GET /orders/new
@@ -115,6 +125,10 @@ class OrdersController < ApplicationController
 
     def set_product
       @product = Product.find(params[:product_id])
+    end
+
+    def set_ordered_product
+      @order_product = OrderProduct.find(params[:order_product_id])
     end
 
     def ordered_product_params
