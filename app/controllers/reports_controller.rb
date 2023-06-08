@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
     if params[:date].present?
       date = params[:date].to_date
     else
-      date = Time.now.to_date
+      date = Time.now.in_time_zone("Mexico City").to_date
     end
 
     @cash_sales = Payment.cash.for_date(date.beginning_of_day.in_time_zone("Mexico City"), date.end_of_day.in_time_zone("Mexico City")).sum(:total)
