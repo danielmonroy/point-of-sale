@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_035533) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_07_060014) do
+  create_table "abilities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -129,6 +135,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_035533) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_abilities", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "ability_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ability_id"], name: "index_user_abilities_on_ability_id"
+    t.index ["user_id"], name: "index_user_abilities_on_user_id"
+  end
+
   create_table "user_permissions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "permission_id", null: false
@@ -175,6 +190,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_035533) do
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"
   add_foreign_key "products", "working_stations"
+  add_foreign_key "user_abilities", "abilities"
+  add_foreign_key "user_abilities", "users"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "users", "stores"

@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   resources :categories
   resources :working_stations
   resources :stores
+  resources :reports do
+    collection do
+      get 'daily_report'
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
