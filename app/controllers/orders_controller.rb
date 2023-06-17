@@ -50,11 +50,17 @@ class OrdersController < ApplicationController
   end
 
   def close
-    respond_to do |format|
-      if @order.close(params[:payment_method])
-        format.html { redirect_to active_orders_orders_path }
-      else
-        format.html { redirect_to @order, notice: "No se pudo cerrar la orden." }
+    if @order.open?
+      respond_to do |format|
+        if @order.close(params[:payment_method])
+          format.html { redirect_to active_orders_orders_path }
+        else
+          format.html { redirect_to @order, notice: "No se pudo cerrar la orden." }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to closed_orders_orders_path , alert: 'Orden cerrada previamente' }
       end
     end
   end
