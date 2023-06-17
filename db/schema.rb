@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_060014) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_16_201816) do
   create_table "abilities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -61,6 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_060014) do
     t.integer "store_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "provider_id"
+    t.index ["provider_id"], name: "index_items_on_provider_id"
     t.index ["store_id"], name: "index_items_on_store_id"
   end
 
@@ -128,6 +130,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_060014) do
     t.index ["working_station_id"], name: "index_products_on_working_station_id"
   end
 
+  create_table "providers", force: :cascade do |t|
+    t.string "name"
+    t.integer "store_id", null: false
+    t.text "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_providers_on_store_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.string "subdomain"
@@ -180,6 +191,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_060014) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "stores"
+  add_foreign_key "items", "providers"
   add_foreign_key "items", "stores"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
@@ -190,6 +202,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_060014) do
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"
   add_foreign_key "products", "working_stations"
+  add_foreign_key "providers", "stores"
   add_foreign_key "user_abilities", "abilities"
   add_foreign_key "user_abilities", "users"
   add_foreign_key "user_permissions", "permissions"

@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   # GET /items or /items.json
   def index
     @items = Item.all
+    @providers = Provider.where(store_id: current_user.store_id)
   end
 
   # GET /items/1 or /items/1.json
@@ -18,12 +19,14 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    @providers = Provider.where(store_id: current_user.store_id)
   end
 
   # POST /items or /items.json
   def create
     @item = Item.new(item_params)
     @item.store_id = current_user.store_id
+
 
     respond_to do |format|
       if @item.save
@@ -57,6 +60,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :stock, :measurement_unit, :stock_warning, :store_id)
+      params.require(:item).permit(:name, :stock, :measurement_unit, :stock_warning, :store_id, :provider_id)
     end
 end
