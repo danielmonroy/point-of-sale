@@ -1,10 +1,106 @@
-<h1>Editing category</h1>
-
-<%= render "form", category: @category %>
-
-<br>
-
-<div>
-  <%= link_to "Show this category", @category %> |
-  <%= link_to "Back to categories", categories_path %>
-</div>
+<%= turbo_frame_tag "modal" do %>
+  <!--begin::Modal - New Item-->
+  <div class="modal fade show" id="kt_modal_new_item" tabindex="-1" aria-hidden="true" style="display:block;">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+      <!--begin::Modal content-->
+      <div class="modal-content">
+        <!--begin::Form-->
+        <%= form_with(model: @category) do |form| %>
+          <!--begin::Modal header-->
+          <div class="modal-header" id="kt_modal_new_item_header">
+            <!--begin::Modal title-->
+            <h2>Editar Categoría</h2>
+            <!--end::Modal title-->
+            <!--begin::Close-->
+            <%= link_to "#", data: { controller: "modals", action: "modals#close" }, class: "btn btn-sm btn-icon btn-active-color-primary" do %>
+              <i class="ki-duotone ki-cross fs-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+            <% end %>
+            <!--end::Close-->
+          </div>
+          <!--end::Modal header-->
+          <!--begin::Modal body-->
+          <div class="modal-body py-10 px-lg-17">
+            <!--begin::Scroll-->
+            <div class="scroll-y me-n7 pe-7" id="kt_modal_new_item_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_item_header" data-kt-scroll-wrappers="#kt_modal_new_item_scroll" data-kt-scroll-offset="300px">
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-5 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nombre</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <%= form.text_field :name, class: "form-control form-control-solid" %>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+              <!--begin::Input group-->
+              <div class="d-flex flex-column mb-5 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Imagen de Categoría</label>
+                <!--end::Label-->
+                <!--begin::Image input-->
+                <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
+                  <!--begin::Preview existing avatar-->
+                  <div class="image-input-wrapper w-150px h-150px" style="background-image: <%= @category.image.blank? ? 'url(assets/media/svg/files/blank-image.svg)' : url_for(@category.image) %>"></div>
+                  <!--end::Preview existing avatar-->
+                  <!--begin::Label-->
+                  <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                    <i class="ki-duotone ki-pencil fs-7">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </i>
+                    <!--begin::Inputs-->
+                    <%= form.file_field :image, accept: "image/png,image/jpg,image/jpeg" %>
+                    <input type="hidden" name="avatar_remove" />
+                    <!--end::Inputs-->
+                  </label>
+                  <!--end::Label-->
+                  <!--begin::Cancel-->
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                    <i class="ki-duotone ki-cross fs-2">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </i>
+                  </span>
+                  <!--end::Cancel-->
+                  <!--begin::Remove-->
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                    <i class="ki-duotone ki-cross fs-2">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </i>
+                  </span>
+                  <!--end::Remove-->
+                </div>
+                <!--end::Image input-->
+              </div>
+              <!--end::Input group-->
+            </div>
+            <!--end::Scroll-->
+          </div>
+          <!--end::Modal body-->
+          <!--begin::Modal footer-->
+          <div class="modal-footer flex-center">
+            <!--begin::Button-->
+            <%= button_to "Cancelar", "#", data: {
+              controller: "modals",
+              action: "modals#close",
+            }, class: "btn btn-light me-3" %>
+            <!--end::Button-->
+            <!--begin::Button-->
+            <button type="submit" id="kt_modal_new_item_submit" class="btn btn-primary">
+              <span>Guardar</span>
+            </button>
+            <!--end::Button-->
+          </div>
+          <!--end::Modal footer-->
+        <% end %>
+        <!--end::Form-->
+      </div>
+    </div>
+  </div>
+  <!--end::Modal - New Item-->
+<% end %>

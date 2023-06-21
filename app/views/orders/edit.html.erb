@@ -16,7 +16,14 @@
               <!--begin::Item-->
               <li class="nav-item mb-3 me-0">
                 <!--begin::Nav link-->
-                <a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg" data-bs-toggle="pill" href="#kt_pos_food_content_<%= c.id %>" style="width: 138px;">
+                <a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-5 pb-5 page-bg" data-bs-toggle="pill" href="#kt_pos_food_content_<%= c.id %>" style="width: 138px;">
+                  <!--begin::Icon-->
+                  <div class="nav-icon mb-3">
+                    <!--begin::Food icon-->
+                    <img src="<%= c.image.blank? ? '' : url_for(c.image) %>" class="w-100px" alt="">
+                    <!--end::Food icon-->
+                  </div>
+                  <!--end::Icon-->
                   <!--begin::Info-->
                   <div class="">
                     <span class="text-gray-800 fw-bold fs-2 d-block"><%= c.name.capitalize %></span>

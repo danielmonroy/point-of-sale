@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @products = Product.for_store(current_user.store_id).available
-    @categories = Category.for_store(current_user.store_id)
+    @categories = Category.for_store(current_user.store_id).order(name: :asc)
   end
 
   # POST /orders or /orders.json
