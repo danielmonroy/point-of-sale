@@ -2,15 +2,15 @@
   <div class="row">
 		<div class="col-md-4" id="print-div">
       <img src="/custom-assets/images/akymbo-negro.png" style="max-width:250px;">
-      <br>
-      <h5>Monte Albán 506 <br>Independencia, Benito Juárez, CDMX</h5>
-      <p>Fecha: <%= @order.created_at.in_time_zone("Mexico City").strftime("%d/%m/%y") %> - Hora: <%= @order.created_at.in_time_zone("Mexico City").strftime("%H:%M")%></p>
-      <br>
+      <p style="text-align:center">CAFÉ DEL MUNDO</p>
+      <h5>MONTE ALBÁN 506, NARVARTE,<br>BENITO JUÁREZ, CDMX</h5>
+      <p>FECHA: <%= @order.created_at.in_time_zone("Mexico City").strftime("%d/%m/%y") %> - <%= @order.created_at.in_time_zone("Mexico City").strftime("%H:%M")%></p>
+      <hr>
       <table class="table">
         <thead>
           <tr>
-            <th width='10%'></th>
-            <th width='70%'></th>
+            <th width='8%'></th>
+            <th width='72%'></th>
             <th width='20%'></th>
           </tr>
         </thead>
@@ -18,27 +18,25 @@
           <% @order.order_products.each do |op| %>
           <tr>
             <td><%= op.quantity %></td>
-            <td><%= op.product.name %></td>
-            <td><%= number_to_currency(op.product.price) %></td>
+            <td><%= op.product.name.upcase %></td>
+            <td style="text-align: right;"><%= number_to_currency(op.product.price) %></td>
           </tr>
           <% end %>
         </tbody>
       </table>
       <hr>
-      <h3>Total: <%= number_to_currency(@order.subtotal) %></h3>
+      <h3 style="text-align:center">Total: <%= number_to_currency(@order.subtotal) %></h3>
+      <div style="text-align:center;">
+        <h5>
+          ¡AKYMBO VA CONTIGO!<br>
+          PIDE POR WHATSAPP: 56 3602 3607
+        </h5>
+      </div>
 		</div>
 	</div>
 </div>
 <!-- content-wrapper ends -->
 
 <script>
-  //window.print();
-  var divContents = document.getElementById("print-div").innerHTML;
-  var a = window.open('', '', 'width=500');
-  a.document.write('<html>');
-  a.document.write('<body style="width:350px;"><div>');
-  a.document.write(divContents);
-  a.document.write('</div></body></html>');
-  a.document.close();
-  a.print();
+  window.print();
 </script>

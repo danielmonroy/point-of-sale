@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="print-html">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Akymbo Café Narvarte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inconsolata:wght@300&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <style>
+      body {
+        font-family: 'Aboreto', cursive;
+        font-family: 'Inconsolata', monospace;
+      }
+    </style>
   </head>
-  <body class="sidebar-fixed" style="width:500px">
+  <body class="sidebar-fixed" style="width:260px">
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper">
         <%= yield %>
