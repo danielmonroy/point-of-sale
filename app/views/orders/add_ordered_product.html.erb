@@ -34,15 +34,15 @@
                 <!--begin::Dialer-->
                 <div class="position-relative d-flex align-items-center" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="15" data-kt-dialer-step="1" data-kt-dialer-decimals="0">
                   <!--begin::Decrease control-->
-                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" data-kt-dialer-control="decrease">
+                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" id="quantityDecrease" onClick="decreaseQuantity()">
                     <i class="ki-duotone ki-minus fs-5x"></i>
                   </button>
                   <!--end::Decrease control-->
                   <!--begin::Input control-->
-                  <input type="text" class="form-control border-0 text-center px-0 fs-5x fw-bold text-gray-800 w-100px" data-kt-dialer-control="input" placeholder="Amount" name="quantity" readonly="readonly" value="1" />
+                  <input type="text" class="form-control border-0 text-center px-0 fs-5x fw-bold text-gray-800 w-100px" data-kt-dialer-control="input" placeholder="Amount" name="quantity" readonly="readonly" value="1" id="quantityInput" />
                   <!--end::Input control-->
                   <!--begin::Increase control-->
-                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" data-kt-dialer-control="increase">
+                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" id="QuantityIncrease" onClick="increaseQuantity()">
                     <i class="ki-duotone ki-plus fs-5x"></i>
                   </button>
                   <!--end::Increase control-->
@@ -89,4 +89,22 @@
     </div>
   </div>
   <!--end::Modal - New Order Product -->
+  <script>
+    let value = 1;
+    const input = document.getElementById("quantityInput");
+    const inc = document.getElementById("quantityIncrease");
+    const dec = document.getElementById("quantityDecrease");
+
+    function increaseQuantity() {
+      value++
+      input.value = value
+    }
+
+    function decreaseQuantity() {
+      if (value > 1) {
+        value--
+        input.value = value
+      }
+    }
+  </script>
 <% end %>
