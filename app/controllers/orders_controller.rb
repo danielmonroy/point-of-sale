@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   end
 
   def closed_orders
-    @orders = Order.closed.order(created_at: :desc)
+    @orders = Order.closed.order(created_at: :desc).limit(25)
   end
 
   def view_ordered_product
