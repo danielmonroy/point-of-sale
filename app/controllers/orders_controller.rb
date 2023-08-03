@@ -4,6 +4,8 @@ class OrdersController < ApplicationController
   before_action :set_product, only: %i[ add_ordered_product ]
   before_action :set_ordered_product, only: %i[ view_ordered_product remove_ordered_product ]
 
+  layout "orders/application"
+
   # GET /orders or /orders.json
   def index
     @orders = Order.all
