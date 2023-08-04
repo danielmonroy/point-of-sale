@@ -19,7 +19,7 @@
           <tr>
             <td><%= op.quantity %></td>
             <td><%= op.product.name.upcase %></td>
-            <td style="text-align: right;"><%= number_to_currency(op.product.price) %></td>
+            <td style="text-align: right;"><%= number_to_currency(op.product.price * op.quantity) %></td>
           </tr>
           <% end %>
         </tbody>

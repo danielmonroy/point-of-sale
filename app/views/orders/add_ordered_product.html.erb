@@ -34,15 +34,15 @@
                 <!--begin::Dialer-->
                 <div class="position-relative d-flex align-items-center" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="15" data-kt-dialer-step="1" data-kt-dialer-decimals="0">
                   <!--begin::Decrease control-->
-                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" id="quantityDecrease" onClick="decreaseQuantity()">
+                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" id="quantityDecrease-<%=@product.id%>" onClick="decreaseQuantity(<%=@product.id%>)">
                     <i class="ki-duotone ki-minus fs-5x"></i>
                   </button>
                   <!--end::Decrease control-->
                   <!--begin::Input control-->
-                  <input type="text" class="form-control border-0 text-center px-0 fs-5x fw-bold text-gray-800 w-100px" data-kt-dialer-control="input" placeholder="Amount" name="quantity" readonly="readonly" value="1" id="quantityInput" />
+                  <input type="text" class="form-control border-0 text-center px-0 fs-5x fw-bold text-gray-800 w-100px" data-kt-dialer-control="input" placeholder="Amount" name="quantity" readonly="readonly" value="1" id="quantityInput-<%=@product.id%>" />
                   <!--end::Input control-->
                   <!--begin::Increase control-->
-                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" id="QuantityIncrease" onClick="increaseQuantity()">
+                  <button type="button" class="btn btn-icon btn-xl btn-light btn-icon-gray-400 p-10" id="quantityIncrease-<%=@product.id%>" onClick="increaseQuantity(<%=@product.id%>)">
                     <i class="ki-duotone ki-plus fs-5x"></i>
                   </button>
                   <!--end::Increase control-->
@@ -90,20 +90,21 @@
   </div>
   <!--end::Modal - New Order Product -->
   <script>
-    let value = 1;
-    const input = document.getElementById("quantityInput");
-    const inc = document.getElementById("quantityIncrease");
-    const dec = document.getElementById("quantityDecrease");
+    function increaseQuantity(id) {
+      const input = document.getElementById(`quantityInput-${id}`);
+      const inc = document.getElementById(`quantityIncrease-${id}`);
+      const dec = document.getElementById(`quantityDecrease-${id}`);
 
-    function increaseQuantity() {
-      value++
-      input.value = value
+      input.value++
     }
 
-    function decreaseQuantity() {
-      if (value > 1) {
-        value--
-        input.value = value
+    function decreaseQuantity(id) {
+      const input = document.getElementById(`quantityInput-${id}`);
+      const inc = document.getElementById(`quantityIncrease-${id}`);
+      const dec = document.getElementById(`quantityDecrease-${id}`);
+
+      if (input.value > 1) {
+        input.value--
       }
     }
   </script>
