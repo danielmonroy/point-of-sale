@@ -91,6 +91,75 @@
   <!--end::Content container-->
 </div>
 <!--end::Content-->
+
+<!--begin::Modal - Add discount-->
+<div class="modal fade" id="kt_modal_discount" tabindex="-1" aria-hidden="true">
+  <!--begin::Modal dialog-->
+  <div class="modal-dialog modal-dialog-centered mw-650px">
+    <!--begin::Modal content-->
+    <div class="modal-content">
+      <!--begin::Form-->
+      <%= form_with url: "/orders/#{@order.id}/add_discount", method: :put do |form| %>
+        <!--begin::Modal header-->
+        <div class="modal-header" id="kt_modal_discount_header">
+          <!--begin::Modal title-->
+          <h2>Agregar descuento</h2>
+          <!--end::Modal title-->
+          <!--begin::Close-->
+            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+              <i class="ki-duotone ki-cross fs-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+            </div>
+            <!--end::Close-->
+        </div>
+        <!--end::Modal header-->
+        <!--begin::Modal body-->
+        <div class="modal-body py-10 px-lg-17">
+          <!--begin::Scroll-->
+          <div class="scroll-y me-n7 pe-7" id="kt_modal_discount_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_discount_header" data-kt-scroll-wrappers="#kt_modal_discount_scroll" data-kt-scroll-offset="300px">
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Descuento</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.number_field :discount, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Tipo de descuento</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.select(:discount_type, [["Porcentaje", "percentage"],["Directo", "direct"]], {}, class: "form-control form-control-solid") %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+          </div>
+          <!--end::Scroll-->
+        </div>
+        <!--end::Modal body-->
+        <!--begin::Modal footer-->
+        <div class="modal-footer flex-center">
+          <!--begin::Button-->
+          <button type="reset" id="kt_modal_discount_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+          <!--end::Button-->
+          <!--begin::Button-->
+          <%= form.submit "Agregar", class: "btn btn-success me-3" %>
+          <!--end::Button-->
+        </div>
+        <!--end::Modal footer-->
+      <% end %>
+      <!--end::Form-->
+    </div>
+  </div>
+</div>
+<!--end::Modal - New Order Product -->
+
 <script>
 function scrollDown(id) {
   $('html, body').animate({

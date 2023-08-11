@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[ show edit update destroy add_ordered_product close print remove_ordered_product ]
+  before_action :set_order, only: %i[ show edit update destroy add_ordered_product close print remove_ordered_product add_discount remove_discount ]
   before_action :set_product, only: %i[ add_ordered_product ]
   before_action :set_ordered_product, only: %i[ view_ordered_product remove_ordered_product ]
 
@@ -69,6 +69,30 @@ class OrdersController < ApplicationController
 
   def open_ordered_product
 
+  end
+
+  def add_discount
+    return unless discount_params[:discount].present? && discount_params[:discount_type].present?
+
+    @order.discount = discount_params[:discount]
+    @order.discount_type = discount_params[:discount_type]
+    
+    if @order.save
+      respond_to do |format|
+        format.html { redirect_to edit_order_path(@order), notice: "Descuento agregado." }
+      end
+    end
+  end
+
+  def remove_discount
+    @order.discount = nil
+    @order.discount_type = nil
+
+    if @order.save
+      respond_to do |format|
+        format.html { redirect_to edit_order_path(@order), notice: "Se eliminó el descuento." }
+      end
+    end
   end
 
   # GET /orders/new
@@ -141,6 +165,10 @@ class OrdersController < ApplicationController
 
     def ordered_product_params
       params.permit(:product_id, :order_id, :comment, :quantity)
+    end
+
+    def discount_params
+      params.permit(:discount, :discount_type)
     end
 
     # Only allow a list of trusted parameters through.

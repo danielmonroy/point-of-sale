@@ -1,17 +1,28 @@
+<% if @order.open? %>
+  <% if @order.discount.blank? %>
+  <button type="button" class="btn btn-secondary fs-1 w-100 py-4 mb-11" data-bs-toggle="modal" data-bs-target="#kt_modal_discount">Agregar descuento</button>
+  <% else %>
+  <%= link_to "Quitar descuento", remove_discount_order_path, class: "btn btn-secondary fs-1 w-100 py-4 mb-11", data: { turbo_method: :put } %>
+  <% end %>
+<% end %>
 <!--begin::Summary-->
 <div class="d-flex flex-stack bg-success rounded-3 p-6 mb-5">
   <!--begin::Content-->
   <div class="fs-6 fw-bold text-white">
-    <!--<span class="d-block lh-1 mb-2">Subtotal</span>
-    <span class="d-block mb-9">Descuento</span>-->
+    <% unless @order.discount.blank? %>
+    <span class="d-block lh-1 mb-2">Subtotal</span>
+    <span class="d-block mb-9">Descuento</span>
+    <% end %>
     <span class="d-block fs-2qx lh-1">Total</span>
   </div>
   <!--end::Content-->
   <!--begin::Content-->
   <div class="fs-6 fw-bold text-white text-end">
-    <!--<span class="d-block lh-1 mb-2" data-kt-pos-element="total"><%= number_to_currency(@order.subtotal) %></span>
-    <span class="d-block mb-9" data-kt-pos-element="discount">$0.00</span>-->
-    <span class="d-block fs-2qx lh-1" data-kt-pos-element="grant-total"><%= number_to_currency(@order.subtotal) %></span>
+    <% unless @order.discount.blank? %>
+    <span class="d-block lh-1 mb-2" data-kt-pos-element="total"><%= number_to_currency(@order.subtotal) %></span>
+    <span class="d-block mb-9" data-kt-pos-element="discount"><%= "#{'$' if @order.direct?}#{@order.discount}#{'%' if @order.percentage?}" %></span>
+    <% end %>
+    <span class="d-block fs-2qx lh-1" data-kt-pos-element="grant-total"><%= number_to_currency(@order.total) %></span>
   </div>
   <!--end::Content-->
 </div>

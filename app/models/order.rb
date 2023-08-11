@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   enum order_type: [ :local, :togo, :delivery ]
   enum status: [ :open, :closed ]
   enum delivery_app: [ :ours, :rappi, :eats ]
+  enum discount_type: [ :percentage, :direct ]
 
   scope :open, -> { where(status: :open) }
 
@@ -17,8 +18,18 @@ class Order < ApplicationRecord
     subtotal
   end
 
+  def total
+    return subtotal unless discount
+    
+    if percentage? 
+      return (subtotal - (subtotal * discount / 100.0)).ceil
+    elsif direct?
+      return subtotal - discount
+    end
+  end
+
   def close(payment_method)
     self.closed!
-    Payment.create(order_id: self.id, total: subtotal, payment_method: payment_method.to_i)
+    Payment.create(order_id: self.id, total: total, payment_method: payment_method.to_i)
   end
 end

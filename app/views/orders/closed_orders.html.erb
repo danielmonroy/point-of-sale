@@ -59,6 +59,7 @@
               <th class="">Pago</th>
               <th class="">Hora de cierre</th>
               <th class="">Total</th>
+              <th class="">Descuento</th>
               <th class="text-end">Acciones</th>
             </tr>
           </thead>
@@ -85,7 +86,16 @@
                 <% end %>
               </td>
               <td><%= order.payment.created_at.in_time_zone("Mexico City").strftime("%d/%m/%y %H:%M") %></td>
-              <td><%= number_to_currency(order.subtotal) %></td>
+              <td><%= number_to_currency(order.total) %></td>
+              <td>
+                <% if order.percentage? %>
+                <span class="badge badge-light-success">%</span>
+                <% elsif order.direct? %>
+                <span class="badge badge-light-success">$</span>
+                <% else %>
+                -
+                <% end %>
+              </td>
               <td class="text-end">
                 <%= link_to edit_order_path(order), class: "btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  do %>
                   <i class="ki-duotone ki-pencil fs-2">

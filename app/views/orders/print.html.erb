@@ -25,7 +25,10 @@
         </tbody>
       </table>
       <hr>
-      <h3 style="text-align:center">Total: <%= number_to_currency(@order.subtotal) %></h3>
+      <% if @order.discount %>
+      <h3 style="text-align:center">Descuento: <%= "#{'$' if @order.direct?}#{@order.discount}#{'%' if @order.percentage?}" %></h3>
+      <% end %>
+      <h2 style="text-align:center">Total: <%= number_to_currency(@order.total) %></h2>
       <div style="text-align:center;margin-top:25px;">
         <h4>
           ¡AKYMBO VA CONTIGO!<br>

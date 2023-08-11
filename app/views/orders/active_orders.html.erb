@@ -83,7 +83,7 @@
                 -
                 <% end %>
               </td>
-              <td><%= number_to_currency(order.subtotal) %></td>
+              <td><%= number_to_currency(order.total) %></td>
               <td class="text-end">
                 <%= link_to edit_order_path(order), class: "btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"  do %>
                   <i class="ki-duotone ki-pencil fs-2">

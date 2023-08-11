@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       get 'view_ordered_product'
       put 'add_product'
       put 'close'
+      put 'add_discount'
+      put 'remove_discount'
       delete 'remove_ordered_product'
     end
   end
