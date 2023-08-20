@@ -1,0 +1,2 @@
+class Close < ApplicationRecord
+end

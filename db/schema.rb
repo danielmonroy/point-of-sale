@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_06_002313) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_060207) do
   create_table "abilities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -51,6 +51,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_002313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_categories_on_store_id"
+  end
+
+  create_table "closes", force: :cascade do |t|
+    t.date "date"
+    t.decimal "cash_total", default: "0.0"
+    t.decimal "card_total", default: "0.0"
+    t.decimal "transfer_total", default: "0.0"
+    t.decimal "cash_expenses", default: "0.0"
+    t.decimal "reported_difference", default: "0.0"
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "real_total"
   end
 
   create_table "items", force: :cascade do |t|

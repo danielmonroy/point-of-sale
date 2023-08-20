@@ -101,8 +101,8 @@
               <!--begin::Progress-->
               <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
                 <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                  <span class="fw-semibold fs-6 text-gray-400">Total de Ventas</span>
-                  <span class="fw-bold fs-6"><%= number_to_currency(@total_sales) %></span>
+                  <span class="fw-semibold fs-6 text-gray-400">Total de ventas</span>
+                  <span class="fw-bold fs-2"><%= number_to_currency(@total_sales) %></span>
                 </div>
               </div>
               <!--end::Progress-->
@@ -115,7 +115,224 @@
       </div>
     </div>
     <!--end::Navbar-->
+    <!--begin::Navbar-->
+    <div class="card mb-5 mb-xl-10">
+      <div class="card-body pt-9 pb-4">
+        <!--begin::Details-->
+        <div class="d-flex flex-wrap flex-sm-nowrap">
+          <!--begin::Info-->
+          <div class="flex-grow-1">
+            <!--begin::Title-->
+            <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+              <!--begin::User-->
+              <div class="d-flex flex-column">
+                <!--begin::Name-->
+                <div class="d-flex align-items-center mb-2">
+                  <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">Reporte de cierre</a>
+                </div>
+                <!--end::Name-->
+              </div>
+              <!--end::User-->
+              <% unless @close %>
+              <!--begin::Actions-->
+              <div class="d-flex mb-2">
+                
+                <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_close">Generar</a>
+              </div>
+              <!--end::Actions-->
+              <% end %>
+            </div>
+            <!--end::Title-->
+            <% if @close %>
+            <!--begin::Stats-->
+            <div class="d-flex flex-wrap flex-stack">
+              <!--begin::Wrapper-->
+              <div class="d-flex flex-column flex-grow-1 pe-8">
+                <!--begin::Stats-->
+                <div class="d-flex flex-wrap">
+                  <!--begin::Stat-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                    <!--begin::Number-->
+                    <div class="d-flex align-items-center">
+                      <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="<%= @close.cash_total %>" data-kt-countup-prefix="$">0</div>
+                    </div>
+                    <!--end::Number-->
+                    <!--begin::Label-->
+                    <div class="fw-semibold fs-6 text-gray-400">Efectivo en caja</div>
+                    <!--end::Label-->
+                  </div>
+                  <!--end::Stat-->
+                  <!--begin::Stat-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                    <!--begin::Number-->
+                    <div class="d-flex align-items-center">
+                      <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="<%= @close.card_total %>" data-kt-countup-prefix="$">0</div>
+                    </div>
+                    <!--end::Number-->
+                    <!--begin::Label-->
+                    <div class="fw-semibold fs-6 text-gray-400">Reportado en terminal</div>
+                    <!--end::Label-->
+                  </div>
+                  <!--end::Stat-->
+                  <!--begin::Stat-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                    <!--begin::Number-->
+                    <div class="d-flex align-items-center">
+                      <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="<%= @close.transfer_total %>" data-kt-countup-prefix="$">0</div>
+                    </div>
+                    <!--end::Number-->
+                    <!--begin::Label-->
+                    <div class="fw-semibold fs-6 text-gray-400">Total en transferencias</div>
+                    <!--end::Label-->
+                  </div>
+                  <!--end::Stat-->
+                  <!--begin::Stat-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                    <!--begin::Number-->
+                    <div class="d-flex align-items-center">
+                      <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="<%= @close.cash_expenses %>" data-kt-countup-prefix="$">0</div>
+                    </div>
+                    <!--end::Number-->
+                    <!--begin::Label-->
+                    <div class="fw-semibold fs-6 text-gray-400">Gastos efectivo</div>
+                    <!--end::Label-->
+                  </div>
+                  <!--end::Stat-->
+                </div>
+                <!--end::Stats-->
+              </div>
+              <!--end::Wrapper-->
+              <!--begin::Progress-->
+              <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
+                <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+                  <span class="fw-semibold fs-6 text-gray-400">Diferencia contra reporte</span>
+                  <span class="fw-bold fs-2 <%= @close.reported_difference >= 0 ? "text-success" : "text-danger" %>"><%= number_to_currency(@close.reported_difference) %></span>
+                </div>
+                <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+                  <span class="fw-semibold fs-2 text-gray-400">Total real</span>
+                  <span class="fw-bold fs-1"><%= number_to_currency(@close.real_total) %></span>
+                </div>
+              </div>
+              <!--end::Progress-->
+            </div>
+            <% if @close.comments %>
+            <div>
+              <span class="fw-semibold fs-4 ">Comentarios</span>
+              <br>
+              <span class="fw-semibold fs-6 text-gray-400"><%= @close.comments %></span>
+            </div>
+            <% end %>
+            <!--end::Stats-->
+            <% end %>
+          </div>
+          <!--end::Info-->
+        </div>
+        <!--end::Details-->
+      </div>
+    </div>
+    <!--end::Navbar-->
   </div>
   <!--end::Content container-->
 </div>
 <!--end::Content-->
+
+<!--begin::Modal - New Report-->
+<div class="modal fade" id="kt_modal_new_close" tabindex="-1" aria-hidden="true">
+  <!--begin::Modal dialog-->
+  <div class="modal-dialog modal-dialog-centered mw-650px">
+    <!--begin::Modal content-->
+    <div class="modal-content">
+      <!--begin::Form-->
+      <%= form_with scope: :close, url: "/reports/daily_close", method: :post do |form| %>
+        <!--begin::Modal header-->
+        <div class="modal-header" id="kt_modal_new_provider_header">
+          <!--begin::Modal title-->
+          <h2>Generar Cierre de Venta</h2>
+          <!--end::Modal title-->
+          <!--begin::Close-->
+          <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+            <i class="ki-duotone ki-cross fs-1">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+          </div>
+          <!--end::Close-->
+        </div>
+        <!--end::Modal header-->
+        <!--begin::Modal body-->
+        <div class="modal-body py-10 px-lg-17">
+          <!--begin::Scroll-->
+          <div class="scroll-y me-n7 pe-7" id="kt_modal_new_item_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_item_header" data-kt-scroll-wrappers="#kt_modal_new_item_scroll" data-kt-scroll-offset="300px">
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Total en tarjeta</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.number_field :card_total, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Total en efectivo</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.number_field :cash_total, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Total en transferencia</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.number_field :transfer_total, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Gastos en efectivo</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.number_field :cash_expenses, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Comentarios</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.text_area :comments, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <%= form.hidden_field :date, value: @date %>
+          </div>
+          <!--end::Scroll-->
+        </div>
+        <!--end::Modal body-->
+        <!--begin::Modal footer-->
+        <div class="modal-footer flex-center">
+          <!--begin::Button-->
+          <button type="reset" id="kt_modal_new_item_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+          <!--end::Button-->
+          <!--begin::Button-->
+          <button type="submit" id="kt_modal_new_item_submit" class="btn btn-primary">
+            <span>Guardar</span>
+          </button>
+          <!--end::Button-->
+        </div>
+        <!--end::Modal footer-->
+      <% end %>
+      <!--end::Form-->
+    </div>
+  </div>
+</div>
+<!--end::Modal - New Report-->

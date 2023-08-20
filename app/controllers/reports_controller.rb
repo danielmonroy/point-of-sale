@@ -12,5 +12,31 @@ class ReportsController < ApplicationController
     @card_sales = Payment.card.for_date(date, date + 24.hours).sum(:total)
     @transfer_sales = Payment.transfer.for_date(date, date + 24.hours).sum(:total)
     @total_sales = Payment.for_date(date, date + 24.hours).sum(:total)
+
+    @close = Close.find_by(date: date.to_date)
+    @date = date
+  end
+
+  def daily_close
+    @close = Close.new(close_params)
+    date = @close.date.to_time + 6.hours
+    
+    total_reported = Payment.for_date(date, date + 24.hours).sum(:total)
+    total_real = @close.cash_total + @close.card_total + @close.transfer_total
+
+    @close.real_total = total_real
+    @close.reported_difference = total_real - total_reported
+
+    if @close.save
+      redirect_to daily_report_reports_path(date: date.strftime("%Y-%m-%d")), notice: "Cierre exitoso."
+    else
+      redirect_to daily_report_reports_path(date: date.strftime("%Y-%m-%d")), alert: "Algo salió mal."
+    end
+  end
+
+  private
+
+  def close_params
+    params.require(:close).permit(:cash_total, :card_total, :transfer_total, :cash_expenses, :comments, :date)
   end
 end
