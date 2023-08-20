@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
     total_real = @close.cash_total + @close.card_total + @close.transfer_total
 
     @close.real_total = total_real
-    @close.reported_difference = total_real - total_reported
+    @close.reported_difference = total_real + @close.cash_expenses - total_reported
 
     if @close.save
       redirect_to daily_report_reports_path(date: date.strftime("%Y-%m-%d")), notice: "Cierre exitoso."
