@@ -34,6 +34,10 @@ class ReportsController < ApplicationController
     end
   end
 
+  def closes
+    @closes = Close.order(date: :desc).limit(30)
+  end
+
   private
 
   def close_params
