@@ -58,6 +58,7 @@
           <!--end:Menu content-->
         </div>
         <!--end:Menu item-->
+        <% if current_user.can("access_items") %>
         <!--begin:Menu item-->
         <div class="menu-item menu-accordion">
           <!--begin:Menu link-->
@@ -75,6 +76,8 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
+        <% end %>
+        <% if current_user.can("access_providers") %>
         <!--begin:Menu item-->
         <div class="menu-item menu-accordion">
           <!--begin:Menu link-->
@@ -88,6 +91,8 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
+        <% end %>
+        <% if current_user.can("access_products") %>
         <!--begin:Menu item-->
         <div class="menu-item menu-accordion">
           <!--begin:Menu link-->
@@ -107,6 +112,8 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
+        <% end %>
+        <% if current_user.can("access_categories") %>
         <!--begin:Menu item-->
         <div class="menu-item menu-accordion">
           <!--begin:Menu link-->
@@ -128,10 +135,28 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
+        <% end %>
         <!--begin:Menu item-->
         <div class="menu-item menu-accordion">
           <!--begin:Menu link-->
           <a class="menu-link" href="/reports/daily_report">
+            <span class="menu-icon">
+              <i class="ki-duotone ki-chart-pie-3">
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+              </i>
+            </span>
+            <span class="menu-title">Reporte Diario</span>
+          </a>
+          <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+        <% if current_user.can("access_closes_reports") %>
+        <!--begin:Menu item-->
+        <div class="menu-item menu-accordion">
+          <!--begin:Menu link-->
+          <a class="menu-link" href="/reports/closes">
             <span class="menu-icon">
               <i class="ki-duotone ki-graph-up fs-2">
                 <span class="path1"></span>
@@ -142,11 +167,12 @@
                 <span class="path6"></span>
               </i>
             </span>
-            <span class="menu-title">Reportes</span>
+            <span class="menu-title">Reportes de Cierre</span>
           </a>
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
+        <% end %>
       </div>
       <!--end::Menu-->
     </div>

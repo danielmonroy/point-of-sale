@@ -26,6 +26,7 @@
 <div id="kt_app_content" class="app-content flex-column-fluid">
   <!--begin::Content container-->
   <div id="kt_app_content_container" class="app-container container-xxl">
+    <% if current_user.can("access_daily_report") %>
     <!--begin::Navbar-->
     <div class="card mb-5 mb-xl-10">
       <div class="card-body pt-9 pb-0">
@@ -115,6 +116,7 @@
       </div>
     </div>
     <!--end::Navbar-->
+    <% end %>
     <!--begin::Navbar-->
     <div class="card mb-5 mb-xl-10">
       <div class="card-body pt-9 pb-4">
