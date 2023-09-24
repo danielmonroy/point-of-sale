@@ -173,6 +173,30 @@
         </div>
         <!--end:Menu item-->
         <% end %>
+
+        <% if current_user.can("access_expenses") %>
+        <!--begin:Menu item-->
+        <div class="menu-item menu-accordion">
+          <!--begin:Menu link-->
+          <a class="menu-link" href="/expenses">
+            <span class="menu-icon">
+              <i class="ki-duotone ki-lots-shopping                        ">
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+                <span class="path4"></span>
+                <span class="path5"></span>
+                <span class="path6"></span>
+                <span class="path7"></span>
+                <span class="path8"></span>
+              </i>
+            </span>
+            <span class="menu-title">Gastos</span>
+          </a>
+          <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+        <% end %>
       </div>
       <!--end::Menu-->
     </div>
