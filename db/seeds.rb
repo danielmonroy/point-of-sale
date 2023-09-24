@@ -18,4 +18,4 @@ available_permissions = [
   "create_expenses"
 ]
 
-available_permissions.each { |p| Permission.find_or_create_ny_ability(p) }
+available_permissions.each { |p| Permission.find_or_create_by(ability: p) }
