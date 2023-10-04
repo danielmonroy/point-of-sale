@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :reports do
     collection do
       get 'daily_report'
+      get 'monthly_report'
       get 'closes'
       post 'daily_close'
     end

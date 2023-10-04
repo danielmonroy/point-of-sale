@@ -17,6 +17,14 @@ class ReportsController < ApplicationController
     @date = date
   end
 
+  def monthly_report
+    @date = Date.today
+
+    @closes = Close.for_date(@date.beginning_of_month, @date.end_of_month).order(date: :asc)
+    @expenses = Expense.for_date(@date.beginning_of_month, @date.end_of_month)
+    @payments = Payment.for_date(@date.beginning_of_month, @date.end_of_month).count
+  end
+
   def daily_close
     @close = Close.new(close_params)
     date = @close.date.to_time + 6.hours

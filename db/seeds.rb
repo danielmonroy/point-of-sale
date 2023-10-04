@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 available_permissions = [
   "access_daily_report",
+  "access_monthly_report",
   "access_closes_report",
   "access_products",
   "access_items",
