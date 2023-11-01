@@ -18,7 +18,8 @@ class ReportsController < ApplicationController
   end
 
   def monthly_report
-    @date = params[:date].present? ? Date.parse(params[:date]) : Date.today
+    current_date = Date.today.day == 1 ? Date.today - 1.day : Date.today # Preventing error when zero data for a month
+    @date = params[:date].present? ? Date.parse(params[:date]) : current_date
 
     @closes = Close.for_date(@date.beginning_of_month, @date.end_of_month).order(date: :asc)
     @expenses = Expense.for_date(@date.beginning_of_month, @date.end_of_month)
