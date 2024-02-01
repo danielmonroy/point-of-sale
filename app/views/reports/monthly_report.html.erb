@@ -96,9 +96,9 @@
               </div>
               <!--end::Label-->
               <!--begin::Label-->
-              <div class="d-flex fs-6 fw-semibold align-items-center">
+              <div class="d-flex fs-6 fw-semibold align-items-center my-3">
                 <!--begin::Bullet-->
-                <div class="bullet w-8px h-6px rounded-2 me-3" style="background-color: #E4E6EF"></div>
+                <div class="bullet w-8px h-6px rounded-2 bg-secondary me-3"></div>
                 <!--end::Bullet-->
                 <!--begin::Label-->
                 <div class="text-gray-500 flex-grow-1 me-4">Transfer</div>
@@ -111,7 +111,7 @@
               <!--begin::Label-->
               <div class="d-flex fs-6 fw-semibold align-items-center">
                 <!--begin::Bullet-->
-                <div class="bullet w-8px h-6px rounded-2 me-3" style="background-color: #E4E6EF"></div>
+                <div class="bullet w-8px h-6px rounded-2 bg-info me-3"></div>
                 <!--end::Bullet-->
                 <!--begin::Label-->
                 <div class="text-gray-500 flex-grow-1 me-4">Externos</div>
@@ -308,7 +308,7 @@
               <!--begin::Statistics-->
               <div class="d-flex mb-2">
                 <span class="fs-4 fw-semibold text-gray-400 me-1">$</span>
-                <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2"><%= number_with_delimiter(@closes.sum(:real_total).to_i - @expenses.sum(:amount).to_i, :delimiter => ',') %></span>
+                <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2"><%= number_with_delimiter(@closes.sum(:real_total).to_i + @external_incomes.sum(:amount).to_i - @expenses.sum(:amount).to_i, :delimiter => ',') %></span>
               </div>
               <!--end::Statistics-->
             </div>
