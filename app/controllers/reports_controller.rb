@@ -24,6 +24,7 @@ class ReportsController < ApplicationController
     @closes = Close.for_date(@date.beginning_of_month, @date.end_of_month).order(date: :asc)
     @expenses = Expense.for_date(@date.beginning_of_month, @date.end_of_month)
     @payments = Payment.for_date(@date.beginning_of_month, @date.end_of_month).count
+    @external_incomes = ExternalIncome.for_date(@date.beginning_of_month, @date.end_of_month)
   end
 
   def daily_close

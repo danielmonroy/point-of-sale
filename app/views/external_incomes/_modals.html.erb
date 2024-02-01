@@ -1,0 +1,99 @@
+<!--begin::Modal - New Expense-->
+<div class="modal fade" id="kt_modal_new_expense" tabindex="-1" aria-hidden="true">
+  <!--begin::Modal dialog-->
+  <div class="modal-dialog modal-dialog-centered mw-650px">
+    <!--begin::Modal content-->
+    <div class="modal-content">
+      <!--begin::Form-->
+      <%= form_with scope: :external_income, url: "/external_incomes", method: :post do |form| %>
+        <!--begin::Modal header-->
+        <div class="modal-header" id="kt_modal_new_item_header">
+          <!--begin::Modal title-->
+          <h2>Registrar Nuevo Ingreso Externo</h2>
+          <!--end::Modal title-->
+          <!--begin::Close-->
+          <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+            <i class="ki-duotone ki-cross fs-1">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+          </div>
+          <!--end::Close-->
+        </div>
+        <!--end::Modal header-->
+        <!--begin::Modal body-->
+        <div class="modal-body py-10 px-lg-17">
+          <!--begin::Scroll-->
+          <div class="scroll-y me-n7 pe-7" id="kt_modal_new_item_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_item_header" data-kt-scroll-wrappers="#kt_modal_new_item_scroll" data-kt-scroll-offset="300px">
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Fecha</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.date_field :date, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Ingreso</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.number_field :amount, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Tipo</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.select :payment_method, [["Tarjeta", :card],["Efectivo", :cash]], {}, class: "form-select form-select-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Fuente</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.select :source, [["Uber Eats", :uber_eats],["Didi Food", :didi_food],["Rappi", :rappi],["Otro", :other]], {}, class: "form-select form-select-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-5 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Descripción del Gasto</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= form.text_field :description, class: "form-control form-control-solid" %>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+          </div>
+          <!--end::Scroll-->
+        </div>
+        <!--end::Modal body-->
+        <!--begin::Modal footer-->
+        <div class="modal-footer flex-center">
+          <!--begin::Button-->
+          <button type="reset" id="kt_modal_new_item_cancel" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+          <!--end::Button-->
+          <!--begin::Button-->
+          <button type="submit" id="kt_modal_new_item_submit" class="btn btn-primary">
+            <span>Guardar</span>
+          </button>
+          <!--end::Button-->
+        </div>
+        <!--end::Modal footer-->
+      <% end %>
+      <!--end::Form-->
+    </div>
+  </div>
+</div>
+<!--end::Modal - New Product-->

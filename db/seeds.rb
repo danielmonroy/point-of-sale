@@ -16,7 +16,9 @@ available_permissions = [
   "create_closing_report",
   "access_admin_panel",
   "access_expenses",
-  "create_expenses"
+  "create_expenses",
+  "access_external_incomes",
+  "create_external_incomes"
 ]
 
 available_permissions.each { |p| Permission.find_or_create_by(ability: p) }
