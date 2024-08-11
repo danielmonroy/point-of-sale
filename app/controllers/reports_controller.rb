@@ -15,6 +15,8 @@ class ReportsController < ApplicationController
 
     @close = Close.find_by(date: date.to_date)
     @date = date
+
+    @top_sales_products = high_selling_products(date_start: date, date_end: date + 24.hours)
   end
 
   def monthly_report
@@ -25,6 +27,8 @@ class ReportsController < ApplicationController
     @expenses = Expense.for_date(@date.beginning_of_month, @date.end_of_month)
     @payments = Payment.for_date(@date.beginning_of_month, @date.end_of_month).count
     @external_incomes = ExternalIncome.for_date(@date.beginning_of_month, @date.end_of_month)
+
+    @top_sales_products = high_selling_products(date_start: @date.beginning_of_month, date_end: @date.end_of_month + 24.hours, limit: 50)
   end
 
   def daily_close
@@ -49,6 +53,24 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def high_selling_products(date_start:, date_end:, limit: 10000)
+    date_start = date_start.to_time + 6.hours
+    date_end = date_end.to_time + 30.hours
+
+    product_ids = OrderProduct.where(created_at: date_start..date_end).
+      group(:product_id).
+      order('sum_quantity DESC').
+      sum(:quantity)
+
+    result = {}
+
+    product_ids.each do |key, val|
+      result[Product.find(key)] = val
+    end
+
+    result
+  end
 
   def close_params
     params.require(:close).permit(:cash_total, :card_total, :transfer_total, :cash_expenses, :comments, :date)
